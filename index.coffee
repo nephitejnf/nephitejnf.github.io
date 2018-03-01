@@ -7,7 +7,7 @@ html ->
         script src: "/js/coffeescript.js"
         script src: "/js/coffeecup.js"
         script src: "pages.coffee"
-        script type: "text/coffeescript", ->
+        coffeescript ->
             changeToAbout = ->
                 `$('main').replaceWith( coffeescript.render( pages.aboutMe ) );`
 
