@@ -13,6 +13,7 @@ html ->
             ul ->
                 li -> a href: 'https://nephitejnf.github.io', -> 'Home'
                 li -> a href: 'https://nephitejnf.itch.io', -> 'Game Projects'
+                li -> a href: 'games/', -> "Other Projects"
                 li -> a href: 'aboutMe/', -> "About Me"
 
         div '#main', ->
