@@ -1,3 +1,4 @@
+
 doctype 5
 html ->
     head ->
@@ -17,8 +18,3 @@ html ->
             h2 "Donate me money"
             a href: "htps://www.patreon.com/nephitejnf", "Patreon"
             a href: "https://liberapay.com/Nephitejnf"
-
-gameProjects = ->
-    div "#games", ->
-        h2 "A game"
-        p "Game info goes here!"

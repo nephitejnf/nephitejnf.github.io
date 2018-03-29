@@ -1,3 +1,4 @@
+
 doctype 5
 html ->
     head ->
@@ -5,11 +6,6 @@ html ->
         title "The Nephitejnf Homepage"
         script src: "/js/jquery-3.3.1.min.js"
         script src: "/js/coffeescript.js"
-        script src: "/js/coffeecup.js"
-        script src: "pages.coffee"
-        coffeescript ->
-            changeToAbout = ->
-                `$('main').replaceWith( coffeescript.render( pages.aboutMe ) );`
 
     body ->
         h1 'The Git-Hub of Nephitejnf'
@@ -17,7 +13,7 @@ html ->
             ul ->
                 li -> a href: 'https://nephitejnf.github.io', -> 'Home'
                 li -> a href: 'https://nephitejnf.itch.io', -> 'Game Projects'
-                li -> a href: 'javascript:void(0)', onclick: 'changeToAbout();', -> 'About Me'
+                li -> a href: 'aboutMe/', -> "About Me"
 
         div '#main', ->
             p 'This is the homepage, hopefully it is easy to navigate.'
