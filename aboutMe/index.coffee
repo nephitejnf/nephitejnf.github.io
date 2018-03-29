@@ -4,6 +4,7 @@ html ->
     head ->
         meta charset: 'utf-8'
         title 'About Nephitejnf'
+        link rel: 'stylesheet', href: '../theme/theme.css'
 
     body ->
         div "#bio", ->

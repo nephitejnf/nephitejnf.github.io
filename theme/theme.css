@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "PokeGB";
+    src: url("PokemonGB.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Droid";
+    src: url("DroidSansMono.ttf") format("truetype");
+}
+
+body {
+    background-color: #25dd22;
+    background: url(wall.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: "PokeGB";
+    font-size: 12px;
+}
+
+a, #descrip {
+    font-family: "Droid";
+}

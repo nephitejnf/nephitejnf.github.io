@@ -4,6 +4,7 @@ html ->
     head ->
         meta charset: 'utf-8'
         title "The Nephitejnf Homepage"
+        link rel: 'stylesheet', href: 'theme/theme.css'
         script src: "/js/jquery-3.3.1.min.js"
         script src: "/js/coffeescript.js"
 
