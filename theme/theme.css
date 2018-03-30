@@ -19,3 +19,52 @@ body {
 a, #descrip {
     font-family: "Droid";
 }
+
+a:link, a:visited, a:active {
+    background-color: grey;
+    color: black;
+    padding: 7px 4px;
+    margin: 2px 0px;
+    display: inline-block;
+}
+
+#navbar {
+    float: left;
+    width 25%;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    border-radius: 18px;
+    background-color: black;
+    border: 18px solid transparent;
+    border-image: url(raw/window9.png) 18 stretch;
+    color
+}
+
+p, h2, h3 {
+    background-color: black;
+    color: white;
+    padding: 5px;
+
+}
+
+header {
+    padding: 10px;
+    background-image: url(raw/tile-a.png);
+    background-repeat: repeat;
+}
+
+header, header p {
+    background-color: transparent;
+    width: 100%;
+    color: black;
+}
+
+div {
+    width: 75%;
+    float: right;
+    margin: 10px;
+    border-radius: 18px;
+    background-color: black;
+    border: 18px solid transparent;
+    border-image: url(raw/window9.png) 18 stretch;
+}

@@ -5,6 +5,15 @@ html ->
         link rel: 'stylesheet', href: '../theme/theme.css'
 
     body ->
+        header ->
+            h1 'The Nephitejnf Git-Hub'
+            p "Welcome and please don't hit anyone"
+        nav '#navbar', ->
+            ul ->
+                li -> a href: 'https://nephitejnf.github.io', -> 'Home'
+                li -> a href: 'https://nephitejnf.itch.io', -> 'Game Projects'
+                li -> a href: 'games/', -> "Other Projects"
+                li -> a href: 'aboutMe/', -> "About Me"
         div "#games", ->
             h2 "Games not listed elsewhere"
             h3 "Adventure of Me"
