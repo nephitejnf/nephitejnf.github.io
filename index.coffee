@@ -21,3 +21,4 @@ html ->
 
         div '#main', ->
             p 'This is the homepage, hopefully it is easy to navigate.'
+            p "This is a place that I'll put things I do or a one stop source to stalking me, take your pick. I know it has been a while, but I'm working on it. There are a lot of projects and I have some things that are going to be clearing out soon."

@@ -24,6 +24,8 @@ html ->
             p a href: "https://nephitejnf.itch.io", "itch.io"
             p a href: "https://twitter.com/nephitejnf", "twitter"
             p a href: "https://twitch.tv/nephitejnf", "twitch"
+            p a href: "https://misskey.xyz/@nephitejnf", "misskey"
+            p a href: "https://mastodon.social/@nephitejnf", "mastodon"
         div "#payment", ->
             h2 "Donate me money"
             p a href: "htps://www.patreon.com/nephitejnf", "Patreon"

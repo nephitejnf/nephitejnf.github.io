@@ -21,8 +21,10 @@ html ->
             p a href: "https://github.com/nephitejnf/Adventure-of-Me", -> "Repo"
             h3 "Rogue Colors: Back burner"
             p '#descrip', "This started out as a game idea, then turned into a game engine idea. I wanted it to be moddable like Dungeons of Dredmor, but I wanted simplicity. That turned into a roguelike engine based on simplicity."
-            h3 "Pokemon Bloodred: Indev"
+            h3 "Pokemon Bloodred: Back burner"
             p '#descrip', "This as a fan-game. It is done in RPG Maker XP with Pokemon Essentials GS."
+            h3 "A mysterious romhack with pokecrystal"
+            p '#descrip', "It's a secret right now. I'll share more when further details are made."
 
         div '#programs', ->
             h2 "Programs"
