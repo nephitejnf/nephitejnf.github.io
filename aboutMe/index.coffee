@@ -22,11 +22,13 @@ html ->
         div "#media", ->
             h2 "Social Media"
             ul ->
-                li -> a href: "https://nephitejnf.itch.io", "itch.io"
-                li -> a href: "https://twitter.com/nephitejnf", "twitter"
-                li -> a href: "https://twitch.tv/nephitejnf", "twitch"
-                li -> a href: "https://misskey.xyz/@nephitejnf", "misskey"
-                li -> a href: "https://mastodon.social/@nephitejnf", "mastodon"
+                li -> a href: "https://nephitejnf.itch.io", "🎮 itch.io"
+                li -> a href: "https://twitter.com/nephitejnf", "🐦 twitter"
+                li -> a href: "https://twitch.tv/nephitejnf", "📺 twitch"
+                li -> a href: "https://misskey.xyz/@nephitejnf", "🗨 misskey"
+                li -> a href: "https://mastodon.social/@nephitejnf", "🐘 mastodon"
+                li -> a herf: "https://discord.gg/8cjSVKc", "💬 discord server"
+                li -> a href: "https://s.team/chat/ZrxXvMiP", "🍜 steam group chat"
         div "#payment", ->
             h2 "Donate me money"
             ul ->
