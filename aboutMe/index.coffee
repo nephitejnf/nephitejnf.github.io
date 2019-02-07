@@ -14,8 +14,8 @@ html ->
             ul ->
                 li -> a href: 'https://nephitejnf.github.io', -> 'Home'
                 li -> a href: 'https://nephitejnf.itch.io', -> 'Game Projects'
-                li -> a href: 'games/', -> "Other Projects"
-                li -> a href: 'aboutMe/', -> "About Me"
+                li -> a href: '../games/', -> "Other Projects"
+                li -> a href: '../aboutMe/', -> "About Me"
         div "#bio", ->
             h2 "What I do"
             p "I enjoy playing games, I have a twitch channel and Youtube. I also enjoy making them, the process of getting it public is still new to me, though. I have projects that I have worked on at itch.io. I hope the make a career of eating, breathing and sleeping games."

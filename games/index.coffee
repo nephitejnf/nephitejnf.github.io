@@ -12,8 +12,8 @@ html ->
             ul ->
                 li -> a href: 'https://nephitejnf.github.io', -> 'Home'
                 li -> a href: 'https://nephitejnf.itch.io', -> 'Game Projects'
-                li -> a href: 'games/', -> "Other Projects"
-                li -> a href: 'aboutMe/', -> "About Me"
+                li -> a href: '../games/', -> "Other Projects"
+                li -> a href: '../aboutMe/', -> "About Me"
         div "#games", ->
             h2 "Games not listed elsewhere"
             h3 "Adventure of Me"
