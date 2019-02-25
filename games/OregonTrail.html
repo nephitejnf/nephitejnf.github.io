@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)https://academy.zenva.com/product-category/english/app-development/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oregon Trail</title>
+    <style>
+    html {
+  height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: Courier;
+}
+
+.hidden {
+  display: none;
+}
+
+#home {
+  background-color: red;
+}
+
+#journey {
+  height: 100%;
+  background-color: #5F9FFF;
+}
+
+#event {
+  background-color: magenta;
+}
+
+#progress-area {
+  float: left;
+  position: relative;
+  width: 400px;
+  margin: 10px;
+}
+
+#trees {
+  width: 100%;
+  image-rendering: pixelated;
+}
+
+#caravan {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+}
+
+#stats-area {
+  background-color: white;
+  float: left;
+  height: 150px;
+  width: 156px;
+  margin: 10px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.stat-value {
+  float: right;
+}
+
+#updates-area {
+  background-color: white;
+  float: left;
+  width: 350px;
+  margin: 10px;
+  height: 150px;
+  padding: 10px;
+  font-size: 12px;
+  overflow-y: scroll;
+}
+
+.update-positive {
+  color: #669966;
+}
+
+.update-negative {
+  color: red;
+}
+
+.update-neutral {
+  color: #90908F;
+}
+
+#shop {
+  float: left;
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  height: 90px;
+  width: 350px;
+}
+
+.product {
+  float: left;
+  margin: 5px;
+  padding: 2px;
+  border: 1px solid black;
+  font-size: 12px;
+}
+
+#shop button {
+  clear: both;
+  float: left;
+  margin: 5px;
+}
+
+#attack {
+  float: left;
+  background-color: white;
+  margin: 10px;
+  padding: 10px;
+  height: 60px;
+  width: 150px;
+}
+
+    </style>
+  <style>@media print {#ghostery-purple-box {display:none !important}}</style></head>
+  <body cz-shortcut-listen="true">
+    <div id="home"></div>
+    <div id="journey">
+      <div id="stats-area">
+        <div class="stat">Day <span id="stat-day" class="stat-value"></span></div>
+        <div class="stat">Distance <span id="stat-distance" class="stat-value"></span></div>
+        <div class="stat">Crew <span id="stat-crew" class="stat-value"></span></div>
+        <div class="stat">Oxen <span id="stat-oxen" class="stat-value"></span></div>
+        <div class="stat">Food <span id="stat-food" class="stat-value"></span></div>
+        <div class="stat">Money <span id="stat-money" class="stat-value"></span></div>
+        <div class="stat">Firepower <span id="stat-firepower" class="stat-value"></span></div>
+        <div class="stat">Weight <span id="stat-weight" class="stat-value"></span><span id="stat-capacity" class="stat-value"></span></div>
+      </div>
+      <div class="updates-area" id="updates-area"></div>
+      <div id="shop" class="hidden">
+        <div id="prods">
+        </div>
+        <button>Leave shop</button>
+      </div>
+      <div id="attack" class="hidden">
+        <div id="attack-description"></div>
+        <button id="fight">Fight</button>
+        <button id="runaway">Run away</button>
+      </div>
+      <div id="progress-area">
+        
+        <img id="caravan" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAMAAACgaw2xAAADAFBMVEUAADMAAAAAAGYAAJkAAMwAAP8AMwAAMzMAM2YAM5kAM8wAM/8AZgAAZjMAZmYAZpkAZswAZv8AmQAAmTMAmWYAmZkAmcwAmf8AzAAAzDMAzGYAzJkAzMwAzP8A/wAA/zMA/2YA/5kA/8wA//8zAAAzADMzAGYzAJkzAMwzAP8zMwAzMzMzM2YzM5kzM8wzM/8zZgAzZjMzZmYzZpkzZswzZv8zmQAzmTMzmWYzmZkzmcwzmf8zzAAzzDMzzGYzzJkzzMwzzP8z/wAz/zMz/2Yz/5kz/8wz//9mAABmADNmAGZmAJlmAMxmAP9mMwBmMzNmM2ZmM5lmM8xmM/9mZgBmZjNmZmZmZplmZsxmZv9mmQBmmTNmmWZmmZlmmcxmmf9mzABmzDNmzGZmzJlmzMxmzP9m/wBm/zNm/2Zm/5lm/8xm//+ZAACZADOZAGaZAJmZAMyZAP+ZMwCZMzOZM2aZM5mZM8yZM/+ZZgCZZjOZZmaZZpmZZsyZZv+ZmQCZmTOZmWaZmZmZmcyZmf+ZzACZzDOZzGaZzJmZzMyZzP+Z/wCZ/zOZ/2aZ/5mZ/8yZ///MAADMADPMAGbMAJnMAMzMAP/MMwDMMzPMM2bMM5nMM8zMM//MZgDMZjPMZmbMZpnMZszMZv/MmQDMmTPMmWbMmZnMmczMmf/MzADMzDPMzGbMzJnMzMzMzP/M/wDM/zPM/2bM/5nM/8zM////AAD/ADP/AGb/AJn/AMz/AP//MwD/MzP/M2b/M5n/M8z/M///ZgD/ZjP/Zmb/Zpn/Zsz/Zv//mQD/mTP/mWb/mZn/mcz/mf//zAD/zDP/zGb/zJn/zMz/zP///wD//zP//2b//5n//8z///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADmF2DdAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQffCQcXKDY09dBUAAAAmklEQVQY05WQMQ5DMQhD6XXIXZicwzDmMN5yyAL5ab+i6kv18IRtGBKZImakhDY1OGWSnONOpqJIjZOPBdNwfkjeCq61L5+L1Dg5JacRJrBYLp80DrEoV8F/Cgrgw90tUSOkfs1+KHNRN88DuxC5VmHau722zMLZOtBY7Tv3UjbQ7grIkiM81OsCDa67ULTmVcTs2HnsKRSRvwFhus6KEejNnAAAAABJRU5ErkJggg==" style="left: 19.7562px;">
+        <img id="trees" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMoAAAAfCAMAAACRSKIGAAAAA3NCSVQICAjb4U/gAAADAFBMVEUAAAAAADMAAGYAAJkAAMwAAP8AMwAAMzMAM2YAM5kAM8wAM/8AZgAAZjMAZmYAZpkAZswAZv8AmQAAmTMAmWYAmZkAmcwAmf8AzAAAzDMAzGYAzJkAzMwAzP8A/wAA/zMA/2YA/5kA/8wA//8zAAAzADMzAGYzAJkzAMwzAP8zMwAzMzMzM2YzM5kzM8wzM/8zZgAzZjMzZmYzZpkzZswzZv8zmQAzmTMzmWYzmZkzmcwzmf8zzAAzzDMzzGYzzJkzzMwzzP8z/wAz/zMz/2Yz/5kz/8wz//9mAABmADNmAGZmAJlmAMxmAP9mMwBmMzNmM2ZmM5lmM8xmM/9mZgBmZjNmZmZmZplmZsxmZv9mmQBmmTNmmWZmmZlmmcxmmf9mzABmzDNmzGZmzJlmzMxmzP9m/wBm/zNm/2Zm/5lm/8xm//+ZAACZADOZAGaZAJmZAMyZAP+ZMwCZMzOZM2aZM5mZM8yZM/+ZZgCZZjOZZmaZZpmZZsyZZv+ZmQCZmTOZmWaZmZmZmcyZmf+ZzACZzDOZzGaZzJmZzMyZzP+Z/wCZ/zOZ/2aZ/5mZ/8yZ///MAADMADPMAGbMAJnMAMzMAP/MMwDMMzPMM2bMM5nMM8zMM//MZgDMZjPMZmbMZpnMZszMZv/MmQDMmTPMmWbMmZnMmczMmf/MzADMzDPMzGbMzJnMzMzMzP/M/wDM/zPM/2bM/5nM/8zM////AAD/ADP/AGb/AJn/AMz/AP//MwD/MzP/M2b/M5n/M8z/M///ZgD/ZjP/Zmb/Zpn/Zsz/Zv//mQD/mTP/mWb/mZn/mcz/mf//zAD/zDP/zGb/zJn/zMz/zP///wD//zP//2b//5n//8z///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABlenwdAAABAHRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG8mZagAAAAlwSFlzAAAOxAAADsQBlSsOGwAAALBJREFUWIXtk7sRwCAMQ7UkndcJi4ShGCeYED5OmQb5osLG79TojJG7YozZiolhUBGxXio2oojKWKlYjxIrXmNzMSx09ZKxvpWGl9RczN9WHjp72ViLIkPdysb83coun+QLg6HDS8cwb+pWs9Ixd2e/zSf5wmDp4+Vj/m5FFULIVkwMM315qRgON/qj7Kg/yo7SKOdZn+wNWutI31BqSmXkb9CqI39DrWXkb0hu5CjKBSdEAM8GjFOdAAAAAElFTkSuQmCC">
+      </div>
+    </div>
+
+    <div id="event"></div>
+    <script>
+    var OregonH = OregonH || {};
+
+OregonH.Event = {};
+
+OregonH.Event.eventTypes = [
+  {
+    type: 'STAT-CHANGE',
+    notification: 'negative',
+    stat: 'crew',
+    value: -3,
+    text: 'Food intoxication. Casualties: '
+  },
+  {
+    type: 'STAT-CHANGE',
+    notification: 'negative',
+    stat: 'crew',
+    value: -4,
+    text: 'Flu outbreak. Casualties: '
+  },
+  {
+    type: 'STAT-CHANGE',
+    notification: 'negative',
+    stat: 'food',
+    value: -10,
+    text: 'Worm infestation. Food lost: '
+  },
+  {
+    type: 'STAT-CHANGE',
+    notification: 'negative',
+    stat: 'money',
+    value: -50,
+    text: 'Pick pockets steal $'
+  },
+  {
+    type: 'STAT-CHANGE',
+    notification: 'negative',
+    stat: 'oxen',
+    value: -1,
+    text: 'Ox flu outbreak. Casualties: '
+  },
+  {
+    type: 'STAT-CHANGE',
+    notification: 'positive',
+    stat: 'food',
+    value: 20,
+    text: 'Found wild berries. Food added: '
+  },
+  {
+    type: 'STAT-CHANGE',
+    notification: 'positive',
+    stat: 'food',
+    value: 20,
+    text: 'Found wild berries. Food added: '
+  },
+  {
+    type: 'STAT-CHANGE',
+    notification: 'positive',
+    stat: 'oxen',
+    value: 1,
+    text: 'Found wild oxen. New oxen: '
+  },
+  {
+    type: 'SHOP',
+    notification: 'neutral',
+    text: 'You have found a shop',
+    products: [
+      {item: 'food', qty: 20, price: 50},
+      {item: 'oxen', qty: 1, price: 200},
+      {item: 'firepower', qty: 2, price: 50},
+      {item: 'crew', qty: 5, price: 80}
+    ]
+  },
+  {
+    type: 'SHOP',
+    notification: 'neutral',
+    text: 'You have found a shop',
+    products: [
+      {item: 'food', qty: 30, price: 50},
+      {item: 'oxen', qty: 1, price: 200},
+      {item: 'firepower', qty: 2, price: 20},
+      {item: 'crew', qty: 10, price: 80}
+    ]
+  },
+  {
+    type: 'SHOP',
+    notification: 'neutral',
+    text: 'Smugglers sell various goods',
+    products: [
+      {item: 'food', qty: 20, price: 60},
+      {item: 'oxen', qty: 1, price: 300},
+      {item: 'firepower', qty: 2, price: 80},
+      {item: 'crew', qty: 5, price: 60}
+    ]
+  },
+  {
+    type: 'ATTACK',
+    notification: 'negative',
+    text: 'Bandits are attacking you'
+  },
+  {
+    type: 'ATTACK',
+    notification: 'negative',
+    text: 'Bandits are attacking you'
+  },
+  {
+    type: 'ATTACK',
+    notification: 'negative',
+    text: 'Bandits are attacking you'
+  }
+];
+
+OregonH.Event.generateEvent = function(){
+  //pick random one
+  var eventIndex = Math.floor(Math.random() * this.eventTypes.length);
+  var eventData = this.eventTypes[eventIndex];
+
+  //events that consist in updating a stat
+  if(eventData.type == 'STAT-CHANGE') {
+    this.stateChangeEvent(eventData);
+  }
+
+  //shops
+  else if(eventData.type == 'SHOP') {
+    //pause game
+    this.game.pauseJourney();
+
+    //notify user
+    this.ui.notify(eventData.text, eventData.notification);
+
+    //prepare event
+    this.shopEvent(eventData);
+  }
+
+  //attacks
+  else if(eventData.type == 'ATTACK') {
+    //pause game
+    this.game.pauseJourney();
+
+    //notify user
+    this.ui.notify(eventData.text, eventData.notification);
+
+    //prepare event
+    this.attackEvent(eventData);
+  }
+};
+
+OregonH.Event.stateChangeEvent = function(eventData) {
+  //can't have negative quantities
+  if(eventData.value + this.caravan[eventData.stat] >= 0) {
+    this.caravan[eventData.stat] += eventData.value;
+    this.ui.notify(eventData.text + Math.abs(eventData.value), eventData.notification);
+  }
+};
+
+OregonH.Event.shopEvent = function(eventData) {
+  //number of products for sale
+  var numProds = Math.ceil(Math.random() * 4);
+
+  //product list
+  var products = [];
+  var j, priceFactor;
+
+  for(var i = 0; i < numProds; i++) {
+    //random product
+    j = Math.floor(Math.random() * eventData.products.length);
+
+    //multiply price by random factor +-30%
+    priceFactor = 0.7 + 0.6 * Math.random();
+
+    products.push({
+      item: eventData.products[j].item,
+      qty: eventData.products[j].qty,
+      price: Math.round(eventData.products[j].price * priceFactor)
+    });
+  }
+
+  this.ui.showShop(products);
+};
+
+//prepare an attack event
+OregonH.Event.attackEvent = function(eventData){
+  var firepower = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_FIREPOWER_AVG);
+  var gold = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_GOLD_AVG);
+
+  this.ui.showAttack(firepower, gold);
+};    
+var OregonH = OregonH || {};
+
+OregonH.Caravan = {};
+
+OregonH.Caravan.init = function(stats){
+  this.day = stats.day;
+  this.distance = stats.distance;
+  this.crew = stats.crew;
+  this.food = stats.food;
+  this.oxen = stats.oxen;
+  this.money = stats.money;
+  this.firepower = stats.firepower;
+};
+
+//update weight and capacity
+OregonH.Caravan.updateWeight = function(){
+  var droppedFood = 0;
+  var droppedGuns = 0;
+
+  //how much can the caravan carry
+  this.capacity = this.oxen * OregonH.WEIGHT_PER_OX + this.crew * OregonH.WEIGHT_PER_PERSON;
+
+  //how much weight do we currently have
+  this.weight = this.food * OregonH.FOOD_WEIGHT + this.firepower * OregonH.FIREPOWER_WEIGHT;
+
+  //drop things behind if it's too much weight
+  //assume guns get dropped before food
+  while(this.firepower && this.capacity <= this.weight) {
+    this.firepower--;
+    this.weight -= OregonH.FIREPOWER_WEIGHT;
+    droppedGuns++;
+  }
+
+  if(droppedGuns) {
+    this.ui.notify('Left '+droppedGuns+' guns behind', 'negative');
+  }
+
+  while(this.food && this.capacity <= this.weight) {
+    this.food--;
+    this.weight -= OregonH.FOOD_WEIGHT;
+    droppedFood++;
+  }
+
+  if(droppedFood) {
+    this.ui.notify('Left '+droppedFood+' food provisions behind', 'negative');
+  }
+};
+
+//update covered distance
+OregonH.Caravan.updateDistance = function() {
+  //the closer to capacity, the slower
+  var diff = this.capacity - this.weight;
+  var speed = OregonH.SLOW_SPEED + diff/this.capacity * OregonH.FULL_SPEED;
+  this.distance += speed;
+};
+
+//food consumption
+OregonH.Caravan.consumeFood = function() {
+  this.food -= this.crew * OregonH.FOOD_PER_PERSON;
+
+  if(this.food < 0) {
+    this.food = 0;
+  }
+};
+var OregonH = OregonH || {};
+
+OregonH.UI = {};
+
+//show a notification in the message area
+OregonH.UI.notify = function(message, type){
+  document.getElementById('updates-area').innerHTML = '<div class="update-' + type + '">Day '+ Math.ceil(this.caravan.day) + ': ' + message+'</div>' + document.getElementById('updates-area').innerHTML;
+};
+
+//refresh visual caravan stats
+OregonH.UI.refreshStats = function() {
+  //modify the dom
+  document.getElementById('stat-day').innerHTML = Math.ceil(this.caravan.day);
+  document.getElementById('stat-distance').innerHTML = Math.floor(this.caravan.distance);
+  document.getElementById('stat-crew').innerHTML = this.caravan.crew;
+  document.getElementById('stat-oxen').innerHTML = this.caravan.oxen;
+  document.getElementById('stat-food').innerHTML = Math.ceil(this.caravan.food);
+  document.getElementById('stat-money').innerHTML = this.caravan.money;
+  document.getElementById('stat-firepower').innerHTML = this.caravan.firepower;
+  document.getElementById('stat-weight').innerHTML = Math.ceil(this.caravan.weight) + '/' + this.caravan.capacity;
+
+  //update caravan position
+  document.getElementById('caravan').style.left = (380 * this.caravan.distance/OregonH.FINAL_DISTANCE) + 'px';
+};
+
+//show shop
+OregonH.UI.showShop = function(products){
+
+  //get shop area
+  var shopDiv = document.getElementById('shop');
+  shopDiv.classList.remove('hidden');
+
+  //init the shop just once
+  if(!this.shopInitiated) {
+
+    //event delegation
+    shopDiv.addEventListener('click', function(e){
+      //what was clicked
+      var target = e.target || e.src;
+
+      //exit button
+      if(target.tagName == 'BUTTON') {
+        //resume journey
+        shopDiv.classList.add('hidden');
+        OregonH.UI.game.resumeJourney();
+      }
+      else if(target.tagName == 'DIV' && target.className.match(/product/)) {
+
+        console.log('buying')
+
+        var bought = OregonH.UI.buyProduct({
+          item: target.getAttribute('data-item'),
+          qty: target.getAttribute('data-qty'),
+          price: target.getAttribute('data-price')
+        });
+
+        if(bought) target.html = '';
+      }
+    });
+
+    this.shopInitiated = true;
+  }
+
+  //clear existing content
+  var prodsDiv = document.getElementById('prods');
+  prodsDiv.innerHTML = '';
+
+  //show products
+  var product;
+  for(var i=0; i < products.length; i++) {
+    product = products[i];
+    prodsDiv.innerHTML += '<div class="product" data-qty="' + product.qty + '" data-item="' + product.item + '" data-price="' + product.price + '">' + product.qty + ' ' + product.item + ' - $' + product.price + '</div>';
+  }
+
+  //setup click event
+  //document.getElementsByClassName('product').addEventListener(OregonH.UI.buyProduct);
+};
+
+//buy product
+OregonH.UI.buyProduct = function(product) {
+  //check we can afford it
+  if(product.price > OregonH.UI.caravan.money) {
+    OregonH.UI.notify('Not enough money', 'negative');
+    return false;
+  }
+
+  OregonH.UI.caravan.money -= product.price;
+
+  OregonH.UI.caravan[product.item] += +product.qty;
+
+  OregonH.UI.notify('Bought ' + product.qty + ' x ' + product.item, 'positive');
+
+  //update weight
+  OregonH.UI.caravan.updateWeight();
+
+  //update visuals
+  OregonH.UI.refreshStats();
+
+  return true;
+
+};
+
+//show attack
+OregonH.UI.showAttack = function(firepower, gold) {
+  var attackDiv = document.getElementById('attack');
+  attackDiv.classList.remove('hidden');
+
+  //keep properties
+  this.firepower = firepower;
+  this.gold = gold;
+
+  //show firepower
+  document.getElementById('attack-description').innerHTML = 'Firepower: ' + firepower;
+
+  //init once
+  if(!this.attackInitiated) {
+
+    //fight
+    document.getElementById('fight').addEventListener('click', this.fight.bind(this));
+
+    //run away
+    document.getElementById('runaway').addEventListener('click', this.runaway.bind(this));
+
+    this.attackInitiated = true;
+  }
+};
+
+//fight
+OregonH.UI.fight = function(){
+
+  var firepower = this.firepower;
+  var gold = this.gold;
+
+  var damage = Math.ceil(Math.max(0, firepower * 2 * Math.random() - this.caravan.firepower));
+
+  //check there are survivors
+  if(damage < this.caravan.crew) {
+    this.caravan.crew -= damage;
+    this.caravan.money += gold;
+    this.notify(damage + ' people were killed fighting', 'negative');
+    this.notify('Found $' + gold, 'gold');
+  }
+  else {
+    this.caravan.crew = 0;
+    this.notify('Everybody died in the fight', 'negative');
+  }
+
+  //resume journey
+  document.getElementById('attack').classList.add('hidden');
+  this.game.resumeJourney();
+};
+
+//runing away from enemy
+OregonH.UI.runaway = function(){
+
+  var firepower = this.firepower;
+
+  var damage = Math.ceil(Math.max(0, firepower * Math.random()/2));
+
+  //check there are survivors
+  if(damage < this.caravan.crew) {
+    this.caravan.crew -= damage;
+    this.notify(damage + ' people were killed running', 'negative');
+  }
+  else {
+    this.caravan.crew = 0;
+    this.notify('Everybody died running away', 'negative');
+  }
+
+  //remove event listener
+  document.getElementById('runaway').removeEventListener('click');
+
+  //resume journey
+  document.getElementById('attack').classList.add('hidden');
+  this.game.resumeJourney();
+
+};
+var OregonH = OregonH || {};
+
+//constants
+OregonH.WEIGHT_PER_OX = 20;
+OregonH.WEIGHT_PER_PERSON = 2;
+OregonH.FOOD_WEIGHT = 0.6;
+OregonH.FIREPOWER_WEIGHT = 5;
+OregonH.GAME_SPEED = 800;
+OregonH.DAY_PER_STEP = 0.2;
+OregonH.FOOD_PER_PERSON = 0.02;
+OregonH.FULL_SPEED = 5;
+OregonH.SLOW_SPEED = 3;
+OregonH.FINAL_DISTANCE = 1000;
+OregonH.EVENT_PROBABILITY = 0.15;
+OregonH.ENEMY_FIREPOWER_AVG = 5;
+OregonH.ENEMY_GOLD_AVG = 50;
+
+OregonH.Game = {};
+
+//initiate the game
+OregonH.Game.init = function(){
+
+  //reference ui
+  this.ui = OregonH.UI;
+
+  //reference event manager
+  this.eventManager = OregonH.Event;
+
+  //setup caravan
+  this.caravan = OregonH.Caravan;
+  this.caravan.init({
+    day: 0,
+    distance: 0,
+    crew: 30,
+    food: 80,
+    oxen: 2,
+    money: 300,
+    firepower: 2
+  });
+
+  //pass references
+  this.caravan.ui = this.ui;
+  this.caravan.eventManager = this.eventManager;
+
+  this.ui.game = this;
+  this.ui.caravan = this.caravan;
+  this.ui.eventManager = this.eventManager;
+
+  this.eventManager.game = this;
+  this.eventManager.caravan = this.caravan;
+  this.eventManager.ui = this.ui;
+
+  //begin adventure!
+  this.startJourney();
+};
+
+//start the journey and time starts running
+OregonH.Game.startJourney = function() {
+  this.gameActive = true;
+  this.previousTime = null;
+  this.ui.notify('A great adventure begins', 'positive');
+
+  this.step();
+};
+
+//game loop
+OregonH.Game.step = function(timestamp) {
+
+  //starting, setup the previous time for the first time
+  if(!this.previousTime){
+    this.previousTime = timestamp;
+    this.updateGame();
+  }
+
+  //time difference
+  var progress = timestamp - this.previousTime;
+
+  //game update
+  if(progress >= OregonH.GAME_SPEED) {
+    this.previousTime = timestamp;
+    this.updateGame();
+  }
+
+  //we use "bind" so that we can refer to the context "this" inside of the step method
+  if(this.gameActive) window.requestAnimationFrame(this.step.bind(this));
+};
+
+//update game stats
+OregonH.Game.updateGame = function() {
+  //day update
+  this.caravan.day += OregonH.DAY_PER_STEP;
+
+  //food consumption
+  this.caravan.consumeFood();
+
+  if(this.caravan.food === 0) {
+    this.ui.notify('Your caravan starved to death', 'negative');
+    this.gameActive = false;
+    return;
+  }
+
+  //update weight
+  this.caravan.updateWeight();
+
+  //update progress
+  this.caravan.updateDistance();
+
+  //show stats
+  this.ui.refreshStats();
+
+  //check if everyone died
+  if(this.caravan.crew <= 0) {
+    this.caravan.crew = 0;
+    this.ui.notify('Everyone died', 'negative');
+    this.gameActive = false;
+    return;
+  }
+
+  //check win game
+  if(this.caravan.distance >= OregonH.FINAL_DISTANCE) {
+    this.ui.notify('You have returned home!', 'positive');
+    this.gameActive = false;
+    return;
+  }
+
+  //random events
+  if(Math.random() <= OregonH.EVENT_PROBABILITY) {
+    this.eventManager.generateEvent();
+  }
+};
+
+//pause the journey
+OregonH.Game.pauseJourney = function() {
+  this.gameActive = false;
+};
+
+//resume the journey
+OregonH.Game.resumeJourney = function() {
+  this.gameActive = true;
+  this.step();
+};
+
+
+//init game
+OregonH.Game.init();
+    </script>
+  
+
+</body></html>
