@@ -25,18 +25,27 @@ a:link, a:visited, a:active {
     padding: 7px 4px;
     margin: 2px 0px;
     display: inline-block;
+    decoration: none;
 }
 
+
 #navbar {
-    float: left;
-    width 25%;
-    padding-top: 2em;
-    padding-bottom: 2em;
+    width 35%;
     border-radius: 18px;
     background-color: black;
     border: 18px solid transparent;
     border-image: url(raw/window9.png) 18 stretch;
-    color
+    color: white;
+}
+#navbar ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#navbar li {
+    padding-right: 25px;
+}
+li a {
+    margin: auto;
 }
 
 p, h2, h3 {
@@ -50,20 +59,50 @@ header {
     padding: 10px;
     background-image: url(raw/tile-a.png);
     background-repeat: repeat;
+    display: flex;
+
 }
 
 header, header p {
     background-color: transparent;
-    width: 100%;
     color: black;
 }
 
 div {
-    width: 75%;
-    float: right;
-    margin: 10px;
+    width: 1000px;
+    margin: auto;
     border-radius: 18px;
     background-color: black;
     border: 18px solid transparent;
     border-image: url(raw/window9.png) 18 stretch;
+}
+div.titles {
+    width: 60%;
+    background-color: transparent;
+    border: 0;
+}
+@media(max-width: 1100px){
+    div {
+        width: 90%;
+        margin: auto;
+        border-radius: 18px;
+        background-color: black;
+        border: 18px solid transparent;
+        border-image: url(raw/window9.png) 18 stretch;
+    }
+}
+
+@media(max-width: 1000px){
+    header {
+        padding: 10px;
+        background-image: url(raw/tile-a.png);
+        background-repeat: repeat;
+        display: flex;
+        flex-direction: column;
+    }
+    div.titles {
+        width: 100%;
+        background-color: transparent;
+        border: 0;
+    }
 }
