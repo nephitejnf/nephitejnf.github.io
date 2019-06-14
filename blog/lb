@@ -2,7 +2,7 @@
 name="Joseph (nephitejnf)"
 webdir="$(pwd)"
 website="https://nephitejnf.github.io/" # Keep a trailing slash.
-css="../theme/theme.css"
+css="../../theme/theme.css"
 blogfile="index.html"
 indexfile="blogindex.html"
 rssfile="rss.xml"
