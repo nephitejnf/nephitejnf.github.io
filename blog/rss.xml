@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/css" href="rss.css"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Nephestate Feed</title>
+        <description>Follow the Nephestate findings and happenings.</description>
+        <language>en-us</language>
+        <link>https://nephitejnf.github.io/blog/rss.xml</link>
+        <atom:link href="https://nephitejnf.github.io/blog/rss.xml" rel="self" type="application/rss+xml"/>
+            <!-- LB -->
+
+<item>
+<title>Starting a Blog... Maybe...</title>
+<guid>https://nephitejnf.github.io/index.html#starting-a-blog-maybe.html</guid>
+<pubDate>Fri, 14 Jun 2019 01:03:46 -0600</pubDate>
+<description><![CDATA[
+<p>So, if you or anyone you know has ever been on the internet, you probably heard of blogging. Yeah, this is one of those. I've tried before, decided to try again. This time, however, I get to use VIM for editing posts and simple scripts to manage it, then I 'git push' the updates.</p>
+<p>This is just the first step, it should look pretty clean, but I hope you enjoy some more in depth adventures.</p>
+]]></description>
+</item>
+
+    </channel>
+</rss>
