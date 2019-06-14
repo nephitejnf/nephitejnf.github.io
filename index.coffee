@@ -16,6 +16,7 @@ html ->
             nav '#navbar', ->
                 ul '#navorder', ->
                     li '#home', -> a href: 'https://nephitejnf.github.io', -> 'Home'
+                    li '#blog', -> a href: 'https://nephitejnf.github.io/blog/index.html', -> 'Blog'
                     li '#games', -> a href: 'https://nephitejnf.itch.io', -> 'Game Projects'
                     li '#others', -> a href: 'games/', -> "Other Projects"
                     li '#about', -> a href: 'aboutMe/', -> "About Me"
