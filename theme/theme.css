@@ -48,11 +48,16 @@ li a {
     margin: auto;
 }
 
-p, h2, h3 {
+p, h2, h3, h1 {
     background-color: black;
     color: white;
     padding: 5px;
 
+}
+
+#blogblock ul {
+    font-family: "PokeGB";
+    color: white;
 }
 
 header {
